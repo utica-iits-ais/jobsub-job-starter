@@ -1,0 +1,65 @@
+import java.nio.file.Paths
+
+plugins {
+    // Apply the java-library plugin for API and implementation separation.
+    id 'java-library'
+    id 'maven-publish'
+    id 'org.springframework.boot' version '3.0.1' apply false
+}
+
+apply plugin: 'io.spring.dependency-management'
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
+}
+
+group 'edu.utica'
+version '1.0'
+
+sourceCompatibility = 17
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation files('libs/gurjbif.jar')
+    implementation files('libs/ojdbc8.jar')
+}
+
+def publishProps = {
+    Properties properties = new Properties()
+    Paths.get(System.properties.'user.home','.credentials','githubPackagesPublish.properties').withInputStream {
+        properties.load(it)
+    }
+    return properties
+}.call()
+
+publishing {
+    repositories {
+        maven {
+            name = 'jobsub-runinfo-starter'
+            url = uri('https://maven.pkg.github.com/utica-iits-ais/jobsub-runinfo-starter')
+            credentials {
+                username = publishProps.username
+                password = publishProps.password
+            }
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            from components.java
+        }
+    }
+}
