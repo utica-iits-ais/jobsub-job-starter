@@ -41,8 +41,8 @@ def publishProps = {
 publishing {
     repositories {
         maven {
-            name = 'jobsub-jobinfo-starter'
-            url = uri('https://maven.pkg.github.com/utica-iits-ais/jobsub-jobinfo-starter')
+            name = 'jobsub-job-starter'
+            url = uri('https://maven.pkg.github.com/utica-iits-ais/jobsub-job-starter')
             credentials {
                 username = publishProps.username
                 password = publishProps.password

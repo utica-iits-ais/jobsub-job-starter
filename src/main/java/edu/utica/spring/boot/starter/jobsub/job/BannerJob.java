@@ -1,31 +1,43 @@
 package edu.utica.spring.boot.starter.jobsub.job;
 
+import edu.utica.spring.boot.starter.jobsub.job.user.User;
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public class BannerJob {
 
     private final ApplicationArguments applicationArguments;
-    private String name;
-    private String number;
+    private final JdbcTemplate jdbcTemplate;
+    private final String name;
+    private final String number;
+    private final User user;
 
-    public BannerJob(ApplicationArguments applicationArguments) {
+    public BannerJob(ApplicationArguments applicationArguments, JdbcTemplate jdbcTemplate) {
         this.applicationArguments = applicationArguments;
+        this.jdbcTemplate = jdbcTemplate;
 
         if (applicationArguments.getSourceArgs().length == 2) {
-            name = applicationArguments.getSourceArgs()[0];
-            number = applicationArguments.getSourceArgs()[1];
+            this.name = applicationArguments.getSourceArgs()[0];
+            this.number = applicationArguments.getSourceArgs()[1];
+            this.user = null;
         } else {
+            this.name = null;
+            this.number = null;
+            this.user = null;
             throw new RuntimeException("Spring Application Run must have only two args getJobName() and getJobNumber() passed down from the BannerBatchProcessor processJob method.");
         }
+
     }
 
-    public String getJobName() {
+    public String getName() {
         return name;
     }
 
-    public String getJobNumber() {
+    public String getNumber() {
         return number;
     }
 
-
+    public User getUser() {
+        return user;
+    }
 }
