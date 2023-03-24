@@ -1,1 +1,1 @@
-edu.utica.spring.boot.starter.jobsub.runinfo.RunInformationAutoConfiguration
+edu.utica.spring.boot.starter.jobsub.job.JobAutoConfiguration
