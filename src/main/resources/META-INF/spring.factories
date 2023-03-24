@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=edu.utica.spring.boot.starter.jobsub.job.JobAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=edu.utica.spring.boot.starter.jobsub.job.BannerJobAutoConfiguration

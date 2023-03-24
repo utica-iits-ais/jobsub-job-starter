@@ -2,13 +2,13 @@ package edu.utica.spring.boot.starter.jobsub.job;
 
 import org.springframework.boot.ApplicationArguments;
 
-public class Job {
+public class BannerJob {
 
     private final ApplicationArguments applicationArguments;
     private String name;
     private String number;
 
-    public Job(ApplicationArguments applicationArguments) {
+    public BannerJob(ApplicationArguments applicationArguments) {
         this.applicationArguments = applicationArguments;
 
         if (applicationArguments.getSourceArgs().length == 2) {

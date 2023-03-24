@@ -11,22 +11,23 @@ import org.springframework.context.annotation.Bean;
 
 
 @AutoConfiguration
-@ConditionalOnClass({Job.class,BatchResourceHolder.class})
+@ConditionalOnClass({BannerJob.class,BatchResourceHolder.class})
 @ConditionalOnBean({ApplicationArguments.class})
 //@ConditionalOnBean({JdbcTemplate.class})
-public class JobAutoConfiguration {
+public class BannerJobAutoConfiguration {
 
     private final ApplicationArguments applicationArguments;
 
     @Autowired
-    public JobAutoConfiguration(ApplicationArguments applicationArguments) {
+    public BannerJobAutoConfiguration(ApplicationArguments applicationArguments) {
+        System.out.println("BannerJobAutoConfiguration");
         this.applicationArguments = applicationArguments;
     }
 
     @Bean
     @ConditionalOnMissingBean
-    Job getJob() {
-        return new Job(applicationArguments);
+    BannerJob getJob() {
+        return new BannerJob(applicationArguments);
     }
 
 
