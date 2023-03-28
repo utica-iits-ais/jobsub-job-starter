@@ -7,15 +7,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class BannerJob {
 
     private final ApplicationArguments applicationArguments;
-//    private final JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
     private final String name;
     private final String number;
     private final User user;
 
-    public BannerJob(ApplicationArguments applicationArguments) {
-        System.out.println("Did this autoconfiguration for BannerJob run before the bean object was requested");
+    public BannerJob(ApplicationArguments applicationArguments, JdbcTemplate jdbcTemplate) {
         this.applicationArguments = applicationArguments;
-//        this.jdbcTemplate = jdbcTemplate;
+        this.jdbcTemplate = jdbcTemplate;
 
         if (applicationArguments.getSourceArgs().length == 2) {
             this.name = applicationArguments.getSourceArgs()[0];
