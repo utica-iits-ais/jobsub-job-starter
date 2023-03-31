@@ -16,16 +16,31 @@ dependencyManagement {
 
 group 'edu.utica'
 version '1.0'
-
 sourceCompatibility = 17
+
+//def packageReadProps = {
+//    Properties properties = new Properties()
+//    Paths.get(System.properties.'user.home','.credentials','githubPackagesRead.properties').withInputStream {
+//        properties.load(it)
+//    }
+//    return properties
+//}.call()
 
 repositories {
     mavenCentral()
+//    maven {
+//        url = uri('https://maven.pkg.github.com/utica-iits-ais/*')
+//        credentials {
+//            username = packageReadProps.username
+//            password = packageReadProps.password
+//        }
+//    }
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+//    implementation 'edu.utica:jobsub-datasource-starter:1.0'
     implementation files('libs/gurjbif.jar')
     implementation files('libs/ojdbc8.jar')
 }
